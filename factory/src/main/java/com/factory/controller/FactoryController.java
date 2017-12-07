@@ -63,7 +63,7 @@ public class FactoryController {
 
     @GetMapping("factories")
     public String listAll(Model model){
-        model.addAttribute("factories ",factoryService.getAll());
+        model.addAttribute("factory ",factoryService.getAll());
 
         return "factoriesView";
     }
