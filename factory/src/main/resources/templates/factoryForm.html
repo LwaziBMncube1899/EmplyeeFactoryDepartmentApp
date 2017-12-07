@@ -16,10 +16,11 @@
     <nav class="navbarnavbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-header" href="#" th:href="@{/}">Home</a>
+
                 <ul class="nav navbar-nav">
-                    <li><a href="#" th:href="@{/factory/factories}"></a></li>
-                    <li><a href="#" th:href="@{/factory/create-factory}"></a></li>
+                    <li><a class="navbar-header" href="#" th:href="@{/}">Home</a></li>
+                    <li><a href="#" th:href="@{/factory/factories}">View Factories</a></li>
+                    <li><a href="#" th:href="@{/factory/create-factory}">Create Factory</a></li>
                 </ul>
             </div>
         </div>
@@ -82,7 +83,7 @@
                 <button type="reset" class="btn btn-default">Clear</button>
                 <button type="button" class="btn btn-default">Exit</button>
             </div>
-            </form>
+        </form>
 
     </div>
 </div>

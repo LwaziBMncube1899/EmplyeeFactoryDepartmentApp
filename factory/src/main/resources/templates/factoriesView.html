@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>View Factories</title>
+
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}" media="screen"/>
+
+    <script src="../static/js/jquery.min.js"
+            th:src="@{/js/jquery.min.js}"></script>
+
+</head>
+<body>
+<div class="container">
+    <nav class="navbarnavbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+
+                <ul class="nav navbar-nav">
+                    <li><a class="navbar-header" href="#" th:href="@{/}">Home</a></li>
+                    <li><a href="#" th:href="@{/factory/factories}">View Factories</a></li>
+                    <li><a href="#" th:href="@{/factory/create-factory}">Create Factory</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="jumbotron">
+        <div class="row text-center">
+            <div class="">
+                <h2>SpringBoot Factory Application</h2>
+            </div>
+        </div>
+        <div class="row text-center">
+
+            <img src="../static/image/Factory.png" height="198" width="255"
+                 th:src="@{/image/Factory.png}"/>
+        </div>
+    </div>
+
+</body>
+</html>
