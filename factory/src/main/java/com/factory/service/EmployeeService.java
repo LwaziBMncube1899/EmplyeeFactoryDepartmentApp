@@ -1,7 +1,6 @@
 package com.factory.service;
 
 
-import com.factory.model.Department;
 import com.factory.model.Employee;
 import com.factory.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
