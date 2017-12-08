@@ -19,17 +19,36 @@ public class FactoryService {
         this.factoryRepository = factoryRepository;
     }
 
-    public void addFactory(Factory factory){
-        factoryRepository.save(factory);
-    }
-    public void deleteFactory(Long id){
-        factoryRepository.delete(id);
-    }
-    public Factory getFactoryById(Long id){
+
+
+    public Factory findFactoryById(Long id) {
         return factoryRepository.findOne(id);
     }
-    public List<Factory> getAll(){
+
+    public Factory findByName(String name) {
+        return factoryRepository.findByName(name);
+    }
+    public List<Factory> findAll() {
         return factoryRepository.findAll();
+    }
+
+    public void deleteAllFactores() {
+        factoryRepository.deleteAll();
+    }
+    public void deleteFactoryById(Long id) {
+        factoryRepository.delete(id);
+    }
+
+    public void saveFactory(Factory factory) {
+        factoryRepository.save(factory);
+    }
+
+    public void updateFactory(Factory factory) {
+        saveFactory(factory);
+    }
+
+    public boolean isFactoryExist(Factory factory){
+        return findByName(factory.getName()) !=null;
     }
 
 }

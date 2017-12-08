@@ -3,17 +3,11 @@ package com.factory.controller;
 import com.factory.model.Factory;
 import com.factory.service.FactoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/factory")
@@ -27,9 +21,9 @@ public class FactoryController {
     }
 
     /*
-    * Create operation
+    * ----------------------Create operation-----------------------------------------------
     * We first create our view to return our form
-    * Then we create our factory and store in our DB
+    * Then we create our factory and store it in our DB
     * */
     @GetMapping("create-factory")
     private ModelAndView createFactoryView(){
@@ -40,7 +34,7 @@ public class FactoryController {
     }
 
     @PostMapping("create-factory")
-    private ModelAndView createFactory(@Valid Factory factory, BindingResult bindingResult){
+    private ModelAndView createFactory(Factory factory, BindingResult bindingResult){
         ModelAndView modelAndView = new ModelAndView();
         if(bindingResult.hasErrors()){
 
@@ -49,21 +43,26 @@ public class FactoryController {
 
         }
 
-        factoryService.addFactory(factory);
+        if (factory.getId() == 0 ) {
+
+            factoryService.saveFactory(factory);
+        }else{
+            factoryService.updateFactory(factory);
+        }
         modelAndView.setViewName("factory");
         return modelAndView;
 
     }
 
     /*
-    * Read Operation
+    * ----------------------Read Operation----------------------------------------
     * Get/list all factories stored in out system
     * Get a factory by it's ID
     * */
 
     @GetMapping("factories")
-    public String listAll(Model model){
-        model.addAttribute("factory ",factoryService.getAll());
+    public String listAllFactories(Model model){
+        model.addAttribute("factory ",factoryService.findAll());
 
         return "factoriesView";
     }
@@ -71,7 +70,7 @@ public class FactoryController {
     @PostMapping("factory/{id}")
     private String getFactory(@PathVariable Long id, Model model){
 
-        model.addAttribute("factory", factoryService.getFactoryById(id));
+        model.addAttribute("factory", factoryService.findFactoryById(id));
         return "factoryView";
     }
 
@@ -79,10 +78,12 @@ public class FactoryController {
     * Update operation
     * */
 
-    @PostMapping("edit/{id}")
+    @PutMapping("edit/{id}")
     private String edit(@PathVariable Long id, Model model){
 
-        model.addAttribute("factory", factoryService.getFactoryById(id));
+        model.addAttribute("factory", factoryService.findFactoryById(id));
+        model.addAttribute("factories", factoryService.findAll());
+
         return "factoriesView";
     }
 
@@ -91,7 +92,8 @@ public class FactoryController {
     * */
     @PostMapping("delete/{id}")
     private String delete(@PathVariable Long id){
-        factoryService.deleteFactory(id);
-        return "factoriesView";
+
+        factoryService.deleteFactoryById(id);
+        return id.toString();
     }
 }

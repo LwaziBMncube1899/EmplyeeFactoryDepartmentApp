@@ -1,9 +1,6 @@
 package com.factory.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Factory {
@@ -15,6 +12,9 @@ public class Factory {
     private String address;
     private String email;
     private String contactNumber;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @JoinTable(name = "department", joinColumns = {@JoinColumn(name = "")})
     private String departmentId;
     private String employeeId;
 
