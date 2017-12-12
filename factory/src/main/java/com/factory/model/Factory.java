@@ -13,10 +13,9 @@ public class Factory {
     private String email;
     private String contactNumber;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
-    @JoinTable(name = "department", joinColumns = {@JoinColumn(name = "")})
-    private String departmentId;
-    private String employeeId;
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+     private Department department;
+
 
     public Long getId() {
         return id;
@@ -58,19 +57,13 @@ public class Factory {
         this.contactNumber = contactNumber;
     }
 
-    public String getDepartmentId() {
-        return departmentId;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setDepartmentId(String departmentId) {
-        this.departmentId = departmentId;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
-    public String getEmployeeId() {
-        return employeeId;
-    }
 
-    public void setEmployeeId(String employeeId) {
-        this.employeeId = employeeId;
-    }
 }

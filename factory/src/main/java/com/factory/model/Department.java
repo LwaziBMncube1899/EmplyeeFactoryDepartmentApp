@@ -15,10 +15,10 @@ public class Department {
     private String departmentName;
     private String departmentDescription;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE} , fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE} , fetch = FetchType.LAZY)
     private Set<Employee> employees;
 
-    @OneToOne
+    @OneToMany
     private Factory factory;
 
     public Long getId() {

@@ -4,15 +4,17 @@ import javax.persistence.*;
 
 @Entity
 public class Employee {
-@Id
-@GeneratedValue(strategy = GenerationType.AUTO)
- private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-private String employeeName;
-private String employeeEmail;
-private String employeeNo;
-@OneToOne
-private Department department;
+    private String employeeName;
+    private String employeeEmail;
+    private String employeeNo;
+
+    @OneToMany
+    private Department department;
+
 
     public Department getDepartment() {
         return department;
@@ -53,4 +55,7 @@ private Department department;
     public void setEmployeeNo(String employeeNo) {
         this.employeeNo = employeeNo;
     }
+
 }
+
+
