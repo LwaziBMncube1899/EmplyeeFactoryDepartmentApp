@@ -19,8 +19,8 @@
 
                 <ul class="nav navbar-nav">
                     <li><a class="navbar-header" href="#" th:href="@{/}">Home</a></li>
-                    <li><a href="#" th:href="@{/factory/factories}">View Factories</a></li>
-                    <li><a href="#" th:href="@{/factory/create-factory}">Create Factory</a></li>
+                    <li><a href="#" th:href="@{/employee/employees}">Edit Employee</a></li>
+                    <li><a href="#" th:href="@{/employee/create-employee}">New Employee</a></li>
                 </ul>
             </div>
         </div>
@@ -29,7 +29,7 @@
     <div class="jumbotron">
         <div class="row text-center">
             <div class="">
-                <h2>SpringBoot Factory Application</h2>
+                <h2>SpringBoot Employee Application</h2>
             </div>
         </div>
         <div class="row text-center">
@@ -39,37 +39,41 @@
         </div>
     </div>
 
-    <h2>Factory Details</h2>
+    <h2>Employee Details</h2>
     <div>
-        <form class="form-horizontal" action="#" th:action="@{/factory/create-factory}" th:object="${factory}"
+        <form class="form-horizontal" action="#" th:action="@{/employee/create-employee}" th:object="${employee}"
               method="POST">
             <input type="hidden" th:field="*{id}"/>
 
             <div class="form-group">
-                <label class="col-sm-2 control-label">Factory Name:</label>
+                <label class="col-sm-2 control-label">Employee Name:</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" th:field="*{name}"/>
+                    <input type="text" class="form-control" th:field="*{employeeName}"/>
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-sm-2 control-label">Factory Address:</label>
+                <label class="col-sm-2 control-label">Employee No.:</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" th:field="*{address}"/>
+                    <input type="text" class="form-control" th:field="*{employeeNo}"/>
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-sm-2 control-label">Factory email:</label>
+                <label class="col-sm-2 control-label">Employee email:</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" th:field="*{email}"/>
+                    <input type="text" class="form-control" th:field="*{employeeEmail}"/>
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-sm-2 control-label">Factory contactNo:</label>
+                <label class="col-sm-2 control-label">Employee department:</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" th:field="*{contactNumber}"/>
+                    <select class="form-control" th:field="*{department}">
+                    <option th:each="departmentName : ${department}"
+                            th:value="${departmentName.id}"
+                            th:text="${departmentName.departmentName}">Departments</option>
+                    </select>
                 </div>
             </div>
             <div class="row">

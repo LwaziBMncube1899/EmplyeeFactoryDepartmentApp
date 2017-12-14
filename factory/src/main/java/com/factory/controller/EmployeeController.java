@@ -1,6 +1,8 @@
+
 package com.factory.controller;
 
 import com.factory.model.Employee;
+import com.factory.service.DepartmentService;
 import com.factory.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,22 +16,26 @@ import org.springframework.web.servlet.ModelAndView;
 public class EmployeeController {
 
     private final EmployeeService employeeService;
+    private final DepartmentService departmentService;
 
     @Autowired
-    public EmployeeController(EmployeeService employeeService) {
+    public EmployeeController(EmployeeService employeeService, DepartmentService departmentService) {
         this.employeeService = employeeService;
+        this.departmentService = departmentService;
     }
 
-    /*
+/*
     * ----------------------Create operation-----------------------------------------------
     * We first create our view to return our form
     * Then we create our employee and store it in our DB
     * */
+
     @GetMapping("create-employee")
     private ModelAndView createEmployeeView(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("employeeForm");
+        modelAndView.setViewName("employee/employeeForm");
         modelAndView.addObject("employee", new Employee());
+        modelAndView.addObject("department", departmentService.findAll());
         return modelAndView;
     }
 
@@ -38,27 +44,29 @@ public class EmployeeController {
         ModelAndView modelAndView = new ModelAndView();
         if(bindingResult.hasErrors()){
 
-            modelAndView.setViewName("employeeForm");
+            modelAndView.setViewName("employee/employeeForm");
             modelAndView.addObject("employee", new Employee());
 
         }
 
-        if (employee.getId() == 0 ) {
+        if (employee.getId() == null ) {
 
             employeeService.saveEmployee(employee);
         }else{
             employeeService.updateEmployee(employee);
         }
-        modelAndView.setViewName("employee");
+        modelAndView.setViewName("employee/employeeForm");
         return modelAndView;
 
     }
 
-    /*
+
+/*
     * ----------------------Read Operation----------------------------------------
     * Get/list all employees stored in out system
     * Get a employee by it's ID
     * */
+
 
     @GetMapping("employees")
     public String listAllFactories(Model model){
@@ -74,9 +82,11 @@ public class EmployeeController {
         return "employee/employeeView";
     }
 
-    /*
+
+/*
     * Update operation
     * */
+
 
     @PutMapping("edit/{id}")
     private String edit(@PathVariable Long id, Model model){
@@ -87,9 +97,11 @@ public class EmployeeController {
         return "employee/employeesView";
     }
 
-    /*
+
+/*
     * Delete Operation
     * */
+
     @PostMapping("delete/{id}")
     private String delete(@PathVariable Long id){
 
@@ -97,3 +109,4 @@ public class EmployeeController {
         return id.toString();
     }
 }
+

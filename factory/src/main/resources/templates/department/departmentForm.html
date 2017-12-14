@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Department Form</title>
+
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}" media="screen"/>
+
+    <script src="../static/js/jquery.min.js"
+            th:src="@{/js/jquery.min.js}"></script>
+
+</head>
+<body>
+<div class="container">
+    <nav class="navbarnavbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+
+                <ul class="nav navbar-nav">
+                    <li><a class="navbar-header" href="#" th:href="@{/}">Home</a></li>
+                    <li><a href="#" th:href="@{/department/departments}">View Departments</a></li>
+                    <li><a href="#" th:href="@{/department/departments}">Edit Departments</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="jumbotron">
+        <div class="row text-center">
+            <div class="">
+                <h2>SpringBoot Department Application</h2>
+            </div>
+        </div>
+        <div class="row text-center">
+
+            <img src="../static/image/Factory.png" height="198" width="255"
+                 th:src="@{/image/Factory.png}"/>
+        </div>
+    </div>
+
+    <h2>Department Details</h2>
+    <div>
+        <form class="form-horizontal" action="#" th:action="@{/department/create-department}" th:object="${department}"
+              method="POST">
+            <input type="hidden" th:field="*{id}"/>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Department Name:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{departmentName}"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Department Description:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{departmentDescription}"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Select Department Factory:</label>
+                <div class="col-sm-10">
+                <select th:field="*{factory}" class="form-control">
+                    <option th:each="factoryName : ${factory}"
+                            th:value="${factoryName.id}"
+                            th:text="${factoryName.name}">Factories</option>
+                </select>
+                </div>
+          </div>
+
+                 <div class="row">
+                <button type="submit" class="btn btn-default">Submit</button>
+                <button type="reset" class="btn btn-default">Clear</button>
+                <button type="button" class="btn btn-default">Exit</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+</body>
+</html>

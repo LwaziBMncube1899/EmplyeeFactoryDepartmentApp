@@ -1,6 +1,7 @@
 package com.factory.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Factory {
@@ -13,8 +14,6 @@ public class Factory {
     private String email;
     private String contactNumber;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
-     private Department department;
 
 
     public Long getId() {
@@ -57,13 +56,4 @@ public class Factory {
         this.contactNumber = contactNumber;
     }
 
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-
-
-}
+  }

@@ -1,8 +1,7 @@
 package com.factory.model;
 
-import org.springframework.data.annotation.Id;
-
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,11 +14,11 @@ public class Department {
     private String departmentName;
     private String departmentDescription;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE} , fetch = FetchType.LAZY)
-    private Set<Employee> employees;
+   /* @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE} , fetch = FetchType.LAZY)
+    private Set<Employee> employees;*/
 
     @OneToMany
-    private Factory factory;
+ private List<Factory> factory;
 
     public Long getId() {
         return id;
@@ -45,19 +44,20 @@ public class Department {
         this.departmentDescription = departmentDescription;
     }
 
-    public Set<Employee> getEmployees() {
+  /*  public Set<Employee> getEmployees() {
         return employees;
     }
 
     public void setEmployees(Set<Employee> employees) {
         this.employees = employees;
     }
+*/
 
-    public Factory getFactory() {
+    public List<Factory> getFactory() {
         return factory;
     }
 
-    public void setFactory(Factory factory) {
+    public void setFactory(List<Factory> factory) {
         this.factory = factory;
     }
 }

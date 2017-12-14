@@ -1,3 +1,4 @@
+
 package com.factory.service;
 
 
@@ -9,13 +10,16 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 
+
 @Service
 @Transactional
 public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
 
-    @Autowired
+
+  @Autowired
+
     public EmployeeService(EmployeeRepository employeeRepository) {
 
         this.employeeRepository = employeeRepository;
@@ -29,7 +33,7 @@ public class EmployeeService {
     }
 
     public Employee findByName(String name) {
-        return employeeRepository.findByName(name);
+        return employeeRepository.findByEmployeeName(name);
     }
     public List<Employee> findAll() {
         return employeeRepository.findAll();

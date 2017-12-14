@@ -1,26 +1,30 @@
+
 package com.factory.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Employee {
-    @Id
+
+@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+
+private Long id;
 
     private String employeeName;
     private String employeeEmail;
     private String employeeNo;
 
-    @OneToMany
-    private Department department;
+  @OneToMany
+    private List<Department> department;
 
 
-    public Department getDepartment() {
+    public List<Department> getDepartment() {
         return department;
     }
 
-    public void setDepartment(Department department) {
+    public void setDepartment(List<Department> department) {
         this.department = department;
     }
 
@@ -57,5 +61,6 @@ public class Employee {
     }
 
 }
+
 
 

@@ -28,7 +28,7 @@ public class FactoryController {
     @GetMapping("create-factory")
     private ModelAndView createFactoryView(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("factoryForm");
+        modelAndView.setViewName("factory/factoryForm");
         modelAndView.addObject("factory", new Factory());
         return modelAndView;
     }
@@ -38,18 +38,18 @@ public class FactoryController {
         ModelAndView modelAndView = new ModelAndView();
         if(bindingResult.hasErrors()){
 
-            modelAndView.setViewName("factoryForm");
+            modelAndView.setViewName("factory/factoryForm");
             modelAndView.addObject("factory", new Factory());
 
         }
 
-        if (factory.getId() == 0 ) {
+        if (factory.getId() == null ) {
 
             factoryService.saveFactory(factory);
         }else{
             factoryService.updateFactory(factory);
         }
-        modelAndView.setViewName("factory");
+        modelAndView.setViewName("factory/factoryForm");
         return modelAndView;
 
     }
@@ -64,14 +64,14 @@ public class FactoryController {
     public String listAllFactories(Model model){
         model.addAttribute("factory ",factoryService.findAll());
 
-        return "factoriesView";
+        return "factory/factoriesView";
     }
 
     @PostMapping("factory/{id}")
     private String getFactory(@PathVariable Long id, Model model){
 
         model.addAttribute("factory", factoryService.findFactoryById(id));
-        return "factoryView";
+        return "factory/factoryView";
     }
 
     /*
@@ -84,7 +84,7 @@ public class FactoryController {
         model.addAttribute("factory", factoryService.findFactoryById(id));
         model.addAttribute("factories", factoryService.findAll());
 
-        return "factoriesView";
+        return "factory/factoriesView";
     }
 
     /*

@@ -4,9 +4,12 @@ package com.factory.service;
 import com.factory.model.Department;
 import com.factory.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -21,15 +24,13 @@ public class DepartmentService {
         this.departmentRepository = departmentRepository;
     }
 
-
-
     public Department findDepartmentById(Long id) {
 
         return departmentRepository.findOne(id);
     }
-
+@Cacheable
     public Department findByName(String name) {
-        return departmentRepository.findByName(name);
+        return departmentRepository.findDepartmentByDepartmentName(name);
     }
     public List<Department> findAll() {
         return departmentRepository.findAll();
@@ -53,5 +54,8 @@ public class DepartmentService {
     public boolean isDepartmentExist(Department department){
         return findByName(department.getDepartmentName()) !=null;
     }
-
+    @Scheduled(cron = "0 0/1 * * * ?")
+public void sayTime(){
+    System.out.println(new Date());
+}
 }
