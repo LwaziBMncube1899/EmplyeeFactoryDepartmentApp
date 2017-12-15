@@ -36,7 +36,7 @@ public class DepartmentController {
         modelAndView.setViewName("department/departmentForm");
         modelAndView.addObject("department", new Department());
        // model.addAttribute("factory",factoryService.findAll());
-       modelAndView.addObject("factory", factoryService.findAll());
+       modelAndView.addObject("factory", factoryService.factoryList());
 
         return modelAndView;
     }
@@ -72,14 +72,14 @@ public class DepartmentController {
 
 
     @GetMapping("departments")
-    public String listAllFactories(Model model){
-        model.addAttribute("department ",departmentService.findAll());
+    public String listAllDepartments(Model model){
+         model.addAttribute("departmentList ",departmentService.findAll());
 
         return "department/departmentsView";
     }
 
     @PostMapping("department/{id}")
-    private String getDepartment(@PathVariable Long id, Model model){
+    private String searchDepartment(@PathVariable Long id, Model model){
 
         model.addAttribute("department", departmentService.findDepartmentById(id));
         return "departmentView";
@@ -91,11 +91,8 @@ public class DepartmentController {
 
     @PutMapping("edit/{id}")
     private String edit(@PathVariable Long id, Model model){
-
         model.addAttribute("department", departmentService.findDepartmentById(id));
-        model.addAttribute("departments", departmentService.findAll());
-
-        return "department/departmentsView";
+        return "department/departmentsUpdate";
     }
 
     /** Delete Operation
