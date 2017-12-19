@@ -1,8 +1,8 @@
-package com.factory.controller;
+package factory.controller;
 
-import com.factory.model.Department;
-import com.factory.service.DepartmentService;
-import com.factory.service.FactoryService;
+import factory.model.Department;
+import factory.service.DepartmentService;
+import factory.service.FactoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -73,8 +73,8 @@ public class DepartmentController {
 
     @GetMapping("departments")
     public String listAllDepartments(Model model){
-         model.addAttribute("departmentList ",departmentService.findAll());
-
+         model.addAttribute("myDepartment",departmentService.findAll());
+        System.out.println(departmentService.findAll().get(0).getDepartmentName()+ " " + departmentService.findAll().get(0).getDepartmentDescription());
         return "department/departmentsView";
     }
 

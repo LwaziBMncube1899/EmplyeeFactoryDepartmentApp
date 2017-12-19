@@ -1,7 +1,7 @@
-package com.factory.controller;
+package factory.controller;
 
-import com.factory.model.Factory;
-import com.factory.service.FactoryService;
+import factory.service.FactoryService;
+import factory.model.Factory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,8 +62,8 @@ public class FactoryController {
 
     @GetMapping("factories")
     public String listAllFactories(Model model){
-        model.addAttribute("factory ",factoryService.findAll());
-
+        model.addAttribute("myFactories",factoryService.factoryList());
+        System.out.println("" + factoryService.factoryList());
         return "factory/factoriesView";
     }
 
@@ -82,7 +82,7 @@ public class FactoryController {
     private String edit(@PathVariable Long id, Model model){
 
         model.addAttribute("factory", factoryService.findFactoryById(id));
-        model.addAttribute("factories", factoryService.findAll());
+        model.addAttribute("factories", factoryService.factoryList());
 
         return "factory/factoriesView";
     }

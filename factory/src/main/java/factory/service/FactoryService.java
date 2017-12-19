@@ -1,7 +1,7 @@
-package com.factory.service;
+package factory.service;
 
-import com.factory.model.Factory;
-import com.factory.repository.FactoryRepository;
+import factory.model.Factory;
+import factory.repository.FactoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +28,7 @@ public class FactoryService {
     public Factory findByName(String name) {
         return factoryRepository.findByName(name);
     }
-    public List<Factory> findAll() {
+    public List<Factory> factoryList() {
         return factoryRepository.findAll();
     }
 

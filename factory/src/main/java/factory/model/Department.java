@@ -1,23 +1,28 @@
-package com.factory.model;
+package factory.model;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @Entity
+@Table(name = "department")
 public class Department {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "department_id")
     private Long id;
 
+    @Column(name = "department_name")
     private String departmentName;
+
+    @Column(name = "department_description")
     private String departmentDescription;
 
    /* @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE} , fetch = FetchType.LAZY)
     private Set<Employee> employees;*/
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
+    @Column(name = "factory_id" )
  private List<Factory> factory;
 
     public Long getId() {

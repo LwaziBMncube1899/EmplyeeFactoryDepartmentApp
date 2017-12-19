@@ -1,8 +1,8 @@
-package com.factory.service;
+package factory.service;
 
 
-import com.factory.model.Department;
-import com.factory.repository.DepartmentRepository;
+import factory.model.Department;
+import factory.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -32,6 +32,7 @@ public class DepartmentService {
     public Department findByName(String name) {
         return departmentRepository.findDepartmentByDepartmentName(name);
     }
+
     public List<Department> findAll() {
         return departmentRepository.findAll();
     }

@@ -1,7 +1,7 @@
-package com.factory.repository;
+package factory.repository;
 
-import com.factory.model.Department;
-/*import com.factory.model.Employee;*/
+import factory.model.Department;
+/*import Employee;*/
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DepartmentRepository extends JpaRepository<Department, Long>{

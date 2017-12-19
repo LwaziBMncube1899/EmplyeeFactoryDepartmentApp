@@ -1,17 +1,25 @@
-package com.factory.model;
+package factory.model;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
+@Table(name = "factory")
 public class Factory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "factory_id")
     private Long id;
 
+    @Column(name = "factory_name")
     private String name;
+
+    @Column(name = "factory_address")
     private String address;
+
+    @Column(name = "factory_email")
     private String email;
+
+    @Column(name = "contact_number")
     private String contactNumber;
 
 

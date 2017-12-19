@@ -1,9 +1,9 @@
 
-package com.factory.service;
+package factory.service;
 
 
-import com.factory.model.Employee;
-import com.factory.repository.EmployeeRepository;
+import factory.repository.EmployeeRepository;
+import factory.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

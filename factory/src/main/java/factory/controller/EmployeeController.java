@@ -1,9 +1,9 @@
 
-package com.factory.controller;
+package factory.controller;
 
-import com.factory.model.Employee;
-import com.factory.service.DepartmentService;
-import com.factory.service.EmployeeService;
+import factory.service.DepartmentService;
+import factory.service.EmployeeService;
+import factory.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -68,10 +68,10 @@ public class EmployeeController {
     * */
 
 
-    @GetMapping("employees")
-    public String listAllFactories(Model model){
-        model.addAttribute("employee ",employeeService.findAll());
-
+    @GetMapping("allEmployees")
+    public String listAllEmployees(Model model){
+        model.addAttribute("myEmployee",employeeService.findAll());
+        System.out.println(employeeService.findAll().get(0).getEmployeeName()+ " " + employeeService.findAll().get(0).getEmployeeEmail());
         return "employee/employeesView";
     }
 

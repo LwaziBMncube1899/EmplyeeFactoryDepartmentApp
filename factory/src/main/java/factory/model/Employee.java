@@ -1,32 +1,33 @@
 
-package com.factory.model;
+package factory.model;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "employee")
 public class Employee {
 
 @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-
+@GeneratedValue(strategy = GenerationType.AUTO)
+@Column(name = "employee_id")
 private Long id;
 
+    @Column(name = "employee_name")
     private String employeeName;
+
+    @Column(name = "employee_email")
     private String employeeEmail;
+
+    @Column(name = "employee_no")
     private String employeeNo;
 
-  @OneToMany
+  @OneToMany(cascade = CascadeType.ALL)
+  @Column(name = "department_id")
     private List<Department> department;
 
 
-    public List<Department> getDepartment() {
-        return department;
-    }
 
-    public void setDepartment(List<Department> department) {
-        this.department = department;
-    }
 
     public Long getId() {
         return id;
@@ -59,7 +60,13 @@ private Long id;
     public void setEmployeeNo(String employeeNo) {
         this.employeeNo = employeeNo;
     }
+    public List<Department> getDepartment() {
+        return department;
+    }
 
+    public void setDepartment(List<Department> department) {
+        this.department = department;
+    }
 }
 
 
