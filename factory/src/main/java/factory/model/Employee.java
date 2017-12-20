@@ -22,9 +22,9 @@ private Long id;
     @Column(name = "employee_no")
     private String employeeNo;
 
-  @OneToMany(cascade = CascadeType.ALL)
-  @Column(name = "department_id")
-    private List<Department> department;
+  @ManyToOne(targetEntity = Department.class)
+  @JoinColumn(name = "department_id", referencedColumnName = "department_id", nullable = false)
+    private Department department;
 
 
 
@@ -60,11 +60,12 @@ private Long id;
     public void setEmployeeNo(String employeeNo) {
         this.employeeNo = employeeNo;
     }
-    public List<Department> getDepartment() {
+
+    public Department getDepartment() {
         return department;
     }
 
-    public void setDepartment(List<Department> department) {
+    public void setDepartment(Department department) {
         this.department = department;
     }
 }

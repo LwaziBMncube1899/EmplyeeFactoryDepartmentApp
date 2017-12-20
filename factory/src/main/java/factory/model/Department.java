@@ -2,6 +2,7 @@ package factory.model;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "department")
@@ -18,12 +19,14 @@ public class Department {
     @Column(name = "department_description")
     private String departmentDescription;
 
-   /* @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE} , fetch = FetchType.LAZY)
-    private Set<Employee> employees;*/
+    @ManyToOne(targetEntity = Factory.class)
+    @JoinColumn(name="factory_id", referencedColumnName ="factory_id", nullable = false)
+    private  Factory factory;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @Column(name = "factory_id" )
- private List<Factory> factory;
+    @OneToMany(targetEntity = Employee.class, mappedBy = "department")
+    private Set<Employee> Employees;
+
+
 
     public Long getId() {
         return id;
@@ -58,11 +61,11 @@ public class Department {
     }
 */
 
-    public List<Factory> getFactory() {
+    public Factory getFactory() {
         return factory;
     }
 
-    public void setFactory(List<Factory> factory) {
+    public void setFactory(Factory factory) {
         this.factory = factory;
     }
 }

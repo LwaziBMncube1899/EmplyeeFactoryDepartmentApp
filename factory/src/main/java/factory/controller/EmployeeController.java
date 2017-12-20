@@ -71,7 +71,6 @@ public class EmployeeController {
     @GetMapping("allEmployees")
     public String listAllEmployees(Model model){
         model.addAttribute("myEmployee",employeeService.findAll());
-        System.out.println(employeeService.findAll().get(0).getEmployeeName()+ " " + employeeService.findAll().get(0).getEmployeeEmail());
         return "employee/employeesView";
     }
 

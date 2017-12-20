@@ -66,7 +66,7 @@
                <tr th:each="depart : ${myDepartment}">
                    <td th:text="${depart.departmentName}"></td>
                    <td th:text="${depart.departmentDescription}"></td>
-                 <td th:text="${depart.factory.get(0).getName()}"></td>
+                 <td th:text="${depart.factory.getName()}"></td>
                    <td><a th:href="@{'/department/department/' + depart.id}" class="btn btn-default">View</a></td>
                    <td><a th:href="@{'/department/edit/' + depart.id}" class="btn btn-default">Edit</a></td>
                    <td><a th:href="@{'/department/delete/' + depart.id}" class="btn btn-danger">Delete</a></td>

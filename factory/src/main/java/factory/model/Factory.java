@@ -1,6 +1,7 @@
 package factory.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "factory")
@@ -22,7 +23,16 @@ public class Factory {
     @Column(name = "contact_number")
     private String contactNumber;
 
+    @OneToMany(targetEntity = Department.class, mappedBy = "factory")
+    private Set<Department> departments;
 
+    public Set<Department> getDepartments() {
+        return departments;
+    }
+
+    public void setDepartments(Set<Department> departments) {
+        this.departments = departments;
+    }
 
     public Long getId() {
         return id;
