@@ -67,10 +67,10 @@ public class FactoryController {
         return "factory/factoriesView";
     }
 
-    @PostMapping("factory/{id}")
+    @GetMapping("factory/{id}")
     private String getFactory(@PathVariable Long id, Model model){
 
-        model.addAttribute("factory", factoryService.findFactoryById(id));
+        model.addAttribute("myFactories", factoryService.findFactoryById(id));
         return "factory/factoryView";
     }
 

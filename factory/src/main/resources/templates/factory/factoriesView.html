@@ -47,7 +47,9 @@
         <table class="table table-striped" border="2">
 
             <tr>
-
+<th>
+    Factory Id
+</th>
                 <th>
                     Factory Address
                 </th>
@@ -66,11 +68,12 @@
                 <th>Delete</th>
             </tr>
             <tr th:each="fact: ${myFactories}">
+                <td th:text="${fact.id}"></td>
             <td th:text="${fact.address}"></td>
             <td th:text="${fact.contactNumber}"></td>
             <td th:text="${fact.email}"></td>
             <td th:text="${fact.name}"></td>
-            <td><a href="#" th:href="@{'/factory/factory/' + fact.id}" class="btn btn-default">View</a></td>
+            <td><a href="#" th:href="@{'/factory/factory/' + 1}" class="btn btn-default">View</a></td>
             <td><a href="#" th:href="@{'/factory/edit/' + fact.id}" class="btn btn-default">Edit</a></td>
             <td><a href="#" th:href="@{'/factory/delete/' + fact.id}" class="btn btn-danger">Delete</a></td>
         </tr>
