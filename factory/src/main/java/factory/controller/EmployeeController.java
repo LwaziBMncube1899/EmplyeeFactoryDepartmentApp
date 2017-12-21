@@ -68,16 +68,16 @@ public class EmployeeController {
     * */
 
 
-    @GetMapping("allEmployees")
+    @GetMapping("employees")
     public String listAllEmployees(Model model){
         model.addAttribute("myEmployee",employeeService.findAll());
         return "employee/employeesView";
     }
 
-    @PostMapping("employee/{id}")
+    @GetMapping("employee/{id}")
     private String getEmployee(@PathVariable Long id, Model model){
 
-        model.addAttribute("employee", employeeService.findEmployeeById(id));
+        model.addAttribute("myEmployee", employeeService.findEmployeeById(id));
         return "employee/employeeView";
     }
 
@@ -91,6 +91,7 @@ public class EmployeeController {
     private String edit(@PathVariable Long id, Model model){
 
         model.addAttribute("employee", employeeService.findEmployeeById(id));
+
         model.addAttribute("employees", employeeService.findAll());
 
         return "employee/employeesView";

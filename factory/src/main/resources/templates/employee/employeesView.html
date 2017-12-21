@@ -74,9 +74,9 @@
              <td th:text="${emp.employeeEmail}"></td>
             <td th:text="${emp.department.getDepartmentName()}"></td>
 
-        <td><a href="#" th:href="@{'/employee/employee/' + emp.id}" class="btn btn-default">View</a></td>
-            <td><a href="#" th:href="@{'/employee/edit/' + emp.id}" class="btn btn-default">Edit</a></td>
-            <td><a href="#" th:href="@{'/employee/delete/' + emp.id}" class="btn btn-danger">Delete</a></td>
+        <td><a href="#" th:href="@{'/employee/employee/' +${emp.id}}" class="btn btn-default">View</a></td>
+            <td><a href="#" th:href="@{'/employee/edit/' + ${emp.id}}" class="btn btn-default">Edit</a></td>
+            <td><a href="#" th:href="@{'/employee/delete/' + ${emp.id}}" class="btn btn-danger">Delete</a></td>
 
         </tr>
         </tbody>

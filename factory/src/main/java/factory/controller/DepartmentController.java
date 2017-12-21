@@ -73,26 +73,34 @@ public class DepartmentController {
 
     @GetMapping("departments")
     public String listAllDepartments(Model model){
-         model.addAttribute("myDepartment",departmentService.findAll());
+         model.addAttribute("myDepartments",departmentService.findAll());
         System.out.println(departmentService.findAll().get(0).getDepartmentName()+ " " + departmentService.findAll().get(0).getDepartmentDescription());
         return "department/departmentsView";
     }
 
-    @PostMapping("department/{id}")
+    @GetMapping("search/{id}")
     private String searchDepartment(@PathVariable Long id, Model model){
 
-        model.addAttribute("department", departmentService.findDepartmentById(id));
-        return "departmentView";
+        model.addAttribute("getDepartment", departmentService.findDepartmentById(id));
+        /*
+        model.addAttribute("factory", factoryService.factoryList());
+        */return "department/departmentUpdate";
     }
 
   /*  * Update operation
     *
 */
 
-    @PutMapping("edit/{id}")
-    private String edit(@PathVariable Long id, Model model){
-        model.addAttribute("department", departmentService.findDepartmentById(id));
-        return "department/departmentsUpdate";
+    @PostMapping("edit/{id}")
+    private String edit(Department department){
+        if (department.getId() == null ) {
+
+            departmentService.saveDepartment(department);
+        }else{
+            departmentService.updateDepartment(department);
+        }
+
+        return "department/departmentsView";
     }
 
     /** Delete Operation
