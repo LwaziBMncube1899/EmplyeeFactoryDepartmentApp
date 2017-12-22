@@ -41,28 +41,28 @@
 
     <h2>Department Details</h2>
     <div>
-        <form class="form-horizontal" action="#" th:action="@{/'department/edit' + getDepartment.id}" th:object="${getDepartment}"
+        <form class="form-horizontal" action="#" th:action="@{/department/update}" th:object="${myDepartment}"
               method="POST">
-            <input type="hidden" th:field="*{getDepartment.id}"/>
+            <input type="hidden" th:value="${myDepartment.id}"  th:field="*{id}" />
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">Department Name:</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" th:field="*{departmentName}" th:value="${getDepartment.departmentName}" placeholder="department name"/>
+                    <input type="text" class="form-control" th:value="${myDepartment.departmentName}" th:field="*{departmentName}" />
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">Department Description:</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" th:field="*{departmentDescription}"  th:value="${getDepartment.DepartmentDescription}" placeholder="department description"/>
+                    <input type="text" class="form-control" th:value="${myDepartment.departmentDescription}" th:field="*{departmentDescription}" />
                 </div>
             </div>
 
-            <div class="form-group">
+                       <div class="form-group">
                 <label class="col-sm-2 control-label">Select Department Factory:</label>
                 <div class="col-sm-10">
-                <select th:field="*{factory}" class="form-control">
+                <select th:field="*{factory}" class="form-control" >
                     <option th:each="factoryName : ${factory}"
                             th:value="${factoryName.id}"
                             th:text="${factoryName.name}">Factories</option>

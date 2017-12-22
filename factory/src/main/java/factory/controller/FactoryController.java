@@ -78,13 +78,36 @@ public class FactoryController {
     * Update operation
     * */
 
-    @PutMapping("edit/{id}")
+    /*@PutMapping("edit/{id}")
     private String edit(@PathVariable Long id, Model model){
 
         model.addAttribute("factory", factoryService.findFactoryById(id));
         model.addAttribute("factories", factoryService.factoryList());
 
         return "factory/factoriesView";
+    }*/
+    @GetMapping("edit/{id}")
+    public ModelAndView edit(@PathVariable("id") long id) {
+        ModelAndView model = new ModelAndView("factory/factoryUpdate");
+       model.addObject("myFactory", factoryService.findFactoryById(id));
+        return model;
+
+    }
+
+    @PostMapping("update")
+    public ModelAndView update(@RequestParam("id") Long id,
+                               @RequestParam("name") String name,
+                               @RequestParam("address") String address,
+                               @RequestParam("email") String email,
+                               @RequestParam("contactNumber") String contactNumber) {
+        Factory factory = factoryService.findFactoryById(id);
+
+        factory.setName(name);
+        factory.setAddress(address);
+        factory.setEmail(email);
+        factory.setContactNumber(contactNumber);
+        factoryService.saveFactory(factory);
+        return new ModelAndView("redirect:/factory/factoriesView");
     }
 
     /*

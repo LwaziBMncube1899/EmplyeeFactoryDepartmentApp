@@ -41,7 +41,7 @@
 
     <h2>Department Details</h2>
     <div>
-        <form class="form-horizontal" action="#" th:action="@{/department/create-department}" th:object="${department}"
+        <form class="form-horizontal" action="#" th:action="@{/department/departments}" th:object="${myDepartment}"
               method="POST">
             <input type="hidden" th:value="${myDepartment.id}" disabled="disabled"/>
 
@@ -67,8 +67,8 @@
           </div>
 
                  <div class="row">
-                <button type="submit" class="btn btn-default">Submit</button>
-                <button type="reset" class="btn btn-default">Clear</button>
+                <button type="submit" class="btn btn-default">OK</button>
+
                 <button type="button" class="btn btn-default">Exit</button>
             </div>
         </form>

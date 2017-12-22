@@ -1,6 +1,7 @@
 
 package factory.controller;
 
+import factory.model.Department;
 import factory.service.DepartmentService;
 import factory.service.EmployeeService;
 import factory.model.Employee;
@@ -85,17 +86,28 @@ public class EmployeeController {
 /*
     * Update operation
     * */
+@PostMapping("update")
+public ModelAndView update(@RequestParam("id") Long id,
+                           @RequestParam("name") String name,
+                           @RequestParam("department") Department department,
+                           @RequestParam("email") String email,
+                           @RequestParam("employeeNo") String employeeNo){
+Employee employee = employeeService.findEmployeeById(id);
+employee.setEmployeeName(name);
+employee.setDepartment(department);
+employee.setEmployeeEmail(email);
+employee.setEmployeeNo(employeeNo);
+    employeeService.saveEmployee(employee);
+    return new ModelAndView("redirect:/employee/employeesView");
+}
 
-
-    @PutMapping("edit/{id}")
-    private String edit(@PathVariable Long id, Model model){
-
-        model.addAttribute("employee", employeeService.findEmployeeById(id));
-
-        model.addAttribute("employees", employeeService.findAll());
-
-        return "employee/employeesView";
+    @GetMapping("edit/{id}")
+    private ModelAndView edit(@PathVariable("id") Long id){
+        ModelAndView model = new ModelAndView("employee/employeeUpdate");
+        model.addObject("employee", employeeService.findEmployeeById(id));
+        return model;
     }
+
 
 
 /*
