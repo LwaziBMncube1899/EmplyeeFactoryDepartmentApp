@@ -1,6 +1,8 @@
 package factory.controller;
 
+
 import factory.model.Department;
+import factory.model.Factory;
 import factory.service.DepartmentService;
 import factory.service.FactoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,12 +46,10 @@ public class DepartmentController {
     @PostMapping("create-department")
     private ModelAndView createDepartment(Department department, BindingResult bindingResult){
         ModelAndView modelAndView = new ModelAndView();
-        if(bindingResult.hasErrors()){
 
+        if(bindingResult.hasErrors()){
             modelAndView.setViewName("department/departmentForm");
             modelAndView.addObject("department", new Department());
-
-
         }
 
         if (department.getId() == null ) {
@@ -78,29 +78,42 @@ public class DepartmentController {
         return "department/departmentsView";
     }
 
-    @GetMapping("search/{id}")
+    @GetMapping("view/{id}")
     private String searchDepartment(@PathVariable Long id, Model model){
 
-        model.addAttribute("getDepartment", departmentService.findDepartmentById(id));
-        /*
+        model.addAttribute("myDepartment", departmentService.findDepartmentById(id));
+
         model.addAttribute("factory", factoryService.factoryList());
-        */return "department/departmentUpdate";
+
+        return "department/departmentView";
     }
 
   /*  * Update operation
     *
 */
 
-    @PostMapping("edit/{id}")
-    private String edit(Department department){
-        if (department.getId() == null ) {
+    @GetMapping("edit/{id}")
+        public ModelAndView edit(@PathVariable("id") long id) {
+            ModelAndView model = new ModelAndView("department/departmentUpdate");
+            Department department = departmentService.findDepartmentById(id);
+            model.addObject("myDepartment", departmentService.findDepartmentById(id));
+            model.addObject("factory", factoryService.factoryList());
+            return model;
 
-            departmentService.saveDepartment(department);
-        }else{
-            departmentService.updateDepartment(department);
-        }
+    }
 
-        return "department/departmentsView";
+    @PostMapping("update")
+    public ModelAndView update(@RequestParam("id") Long id,
+                               @RequestParam("departmentName") String name,
+                               @RequestParam("departmentDescription") String description,
+                               @RequestParam("factory") Factory factory) {
+        Department department = departmentService.findDepartmentById(id);
+
+        department.setDepartmentName(name);
+        department.setDepartmentDescription(description);
+        department.setFactory(factory);
+        departmentService.saveDepartment(department);
+        return new ModelAndView("redirect:/department/departmentsView");
     }
 
     /** Delete Operation
@@ -110,6 +123,7 @@ public class DepartmentController {
     private String delete(@PathVariable Long id){
 
         departmentService.deleteDepartmentById(id);
-        return id.toString();
+        return "department/departmentsView";
+
     }
 }
