@@ -113,7 +113,7 @@ public class DepartmentController {
         department.setDepartmentDescription(description);
         department.setFactory(factory);
         departmentService.saveDepartment(department);
-        return new ModelAndView("redirect:/department/departmentsView");
+        return new ModelAndView("redirect:/department/departments");
     }
 
     /** Delete Operation

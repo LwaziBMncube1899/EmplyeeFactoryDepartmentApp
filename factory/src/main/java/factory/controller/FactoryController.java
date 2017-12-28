@@ -63,7 +63,6 @@ public class FactoryController {
     @GetMapping("factories")
     public String listAllFactories(Model model){
         model.addAttribute("myFactories",factoryService.factoryList());
-        System.out.println("" + factoryService.factoryList());
         return "factory/factoriesView";
     }
 
@@ -107,7 +106,7 @@ public class FactoryController {
         factory.setEmail(email);
         factory.setContactNumber(contactNumber);
         factoryService.saveFactory(factory);
-        return new ModelAndView("redirect:/factory/factoriesView");
+        return new ModelAndView("redirect:/factory/factories");
     }
 
     /*

@@ -57,7 +57,7 @@ public class EmployeeController {
             employeeService.updateEmployee(employee);
         }
         modelAndView.setViewName("employee/employeeForm");
-        return modelAndView;
+        return new ModelAndView("redirect:/employee/employees");
 
     }
 
@@ -88,9 +88,9 @@ public class EmployeeController {
     * */
 @PostMapping("update")
 public ModelAndView update(@RequestParam("id") Long id,
-                           @RequestParam("name") String name,
+                           @RequestParam("employeeName") String name,
                            @RequestParam("department") Department department,
-                           @RequestParam("email") String email,
+                           @RequestParam("employeeEmail") String email,
                            @RequestParam("employeeNo") String employeeNo){
 Employee employee = employeeService.findEmployeeById(id);
 employee.setEmployeeName(name);
@@ -98,13 +98,15 @@ employee.setDepartment(department);
 employee.setEmployeeEmail(email);
 employee.setEmployeeNo(employeeNo);
     employeeService.saveEmployee(employee);
-    return new ModelAndView("redirect:/employee/employeesView");
+    return new ModelAndView("redirect:/employee/employees");
 }
 
     @GetMapping("edit/{id}")
     private ModelAndView edit(@PathVariable("id") Long id){
         ModelAndView model = new ModelAndView("employee/employeeUpdate");
-        model.addObject("employee", employeeService.findEmployeeById(id));
+        model.addObject("myEmployee", employeeService.findEmployeeById(id));
+        model.addObject("department", departmentService.findDepartmentById(id));
+
         return model;
     }
 
