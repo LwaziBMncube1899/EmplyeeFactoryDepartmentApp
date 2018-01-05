@@ -2,6 +2,7 @@ package factory.service;
 
 
 import factory.model.Department;
+import factory.model.Factory;
 import factory.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -28,10 +29,17 @@ public class DepartmentService {
 
         return departmentRepository.findOne(id);
     }
+
+    public List<Department> findByFactoryId(Long id) {
+
+      return   departmentRepository.findDepartmentsByFactory(id);
+    }
+/*
 @Cacheable
     public Department findByName(String name) {
         return departmentRepository.findDepartmentByDepartmentName(name);
     }
+*/
 
     public List<Department> findAll() {
         return departmentRepository.findAll();
@@ -40,6 +48,7 @@ public class DepartmentService {
     public void deleteAllFactores() {
         departmentRepository.deleteAll();
     }
+
     public void deleteDepartmentById(Long id) {
         departmentRepository.delete(id);
     }
@@ -52,9 +61,9 @@ public class DepartmentService {
         saveDepartment(department);
     }
 
-    public boolean isDepartmentExist(Department department){
+  /*  public boolean isDepartmentExist(Department department){
         return findByName(department.getDepartmentName()) !=null;
-    }
+    }*/
     @Scheduled(cron = "0 0/1 * * * ?")
 public void sayTime(){
     System.out.println(new Date());

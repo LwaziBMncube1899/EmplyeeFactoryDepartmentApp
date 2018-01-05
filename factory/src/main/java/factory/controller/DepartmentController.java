@@ -74,7 +74,6 @@ public class DepartmentController {
     @GetMapping("departments")
     public String listAllDepartments(Model model){
          model.addAttribute("myDepartments",departmentService.findAll());
-        System.out.println(departmentService.findAll().get(0).getDepartmentName()+ " " + departmentService.findAll().get(0).getDepartmentDescription());
         return "department/departmentsView";
     }
 

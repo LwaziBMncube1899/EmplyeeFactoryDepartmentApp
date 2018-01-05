@@ -1,5 +1,6 @@
 package factory.controller;
 
+import factory.service.DepartmentService;
 import factory.service.FactoryService;
 import factory.model.Factory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class FactoryController {
 
     private final FactoryService factoryService;
+
+    @Autowired
+private final DepartmentService departmentService = null;
 
     @Autowired
     public FactoryController(FactoryService factoryService) {
@@ -70,6 +74,10 @@ public class FactoryController {
     private String getFactory(@PathVariable Long id, Model model){
 
         model.addAttribute("myFactories", factoryService.findFactoryById(id));
+        model.addAttribute("myDepartments", departmentService.findDepartmentById(id).getDepartmentName());
+/*
+        System.out.println("" + departmentService.findDepartmentById(id).getDepartmentName() );
+        */
         return "factory/factoryView";
     }
 

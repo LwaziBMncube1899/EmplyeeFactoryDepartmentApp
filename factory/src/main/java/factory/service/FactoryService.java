@@ -28,6 +28,7 @@ public class FactoryService {
     public Factory findByName(String name) {
         return factoryRepository.findByName(name);
     }
+
     public List<Factory> factoryList() {
         return factoryRepository.findAll();
     }
