@@ -71,6 +71,7 @@
                 </div>
             </div>
 
+        <div class="form-group"></div>
         <div class="container">
 
             <table class="table table-striped">
@@ -84,26 +85,20 @@
                     </th>
 
                     <th>View</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-                <tbody>
-                <tr th:each="depart : ${myDepartments}">
-                    <td th:text="${depart.departmentName}"></td>
-                    <td th:text="${depart.departmentDescription}"></td>
 
-                    <td><a href="#" th:href="@{'/department/view/' + ${depart.id}}" class="btn btn-default">View</a></td>
-                    <td><a href="#" th:href="@{'/department/edit/' + ${depart.id}}" class="btn btn-default">Edit</a></td>
-                    <td><a href="#" th:href="@{'/department/delete/' + ${depart.id}}" class="btn btn-danger">Delete</a></td>
                 </tr>
+                <tbody >
+                <tr th:each="depart : ${myDepartments}">
+                    <td th:text="${depart.departmentName}" ></td>
+                    <td th:text="${depart.departmentDescription}"></td>
+                   <td><a href="#" th:href="@{'/department/departmentEmployees/' + ${depart.id}}" class="btn btn-default">View</a></td>
+                                  </tr>
                 </tbody>
             </table>
         </div>
             <div class="row">
-                <button type="submit" class="btn btn-default">Submit</button>
-                <button type="reset" class="btn btn-default">Clear</button>
-                <button type="button" class="btn btn-default">Exit</button>
-            </div>
+                <button type="submit" class="btn btn-default">OK</button>
+                </div>
 
     </div>
 </div>

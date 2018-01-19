@@ -2,10 +2,12 @@
 package factory.controller;
 
 import factory.model.Department;
+import factory.model.PageWrapper;
 import factory.service.DepartmentService;
 import factory.service.EmployeeService;
 import factory.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,11 +34,11 @@ public class EmployeeController {
     * */
 
     @GetMapping("create-employee")
-    private ModelAndView createEmployeeView(){
+    private ModelAndView createEmployeeView(Pageable pageable){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("employee/employeeForm");
         modelAndView.addObject("employee", new Employee());
-        modelAndView.addObject("department", departmentService.findAll());
+        modelAndView.addObject("department", departmentService.findAll(pageable));
         return modelAndView;
     }
 
@@ -70,8 +72,13 @@ public class EmployeeController {
 
 
     @GetMapping("employees")
-    public String listAllEmployees(Model model){
-        model.addAttribute("myEmployee",employeeService.findAll());
+    public String listAllEmployees(Model model , Pageable pageable){
+
+        PageWrapper<Employee> page = new PageWrapper<Employee>
+                (employeeService.findAll(pageable), "employees");
+
+        model.addAttribute("page",page);
+        model.addAttribute("myEmployees", employeeService.findAll(pageable));
         return "employee/employeesView";
     }
 

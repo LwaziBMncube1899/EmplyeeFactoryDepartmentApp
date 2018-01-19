@@ -19,7 +19,7 @@
 
                 <ul class="nav navbar-nav">
                     <li><a class="navbar-header" href="#" th:href="@{/}">Home</a></li>
-                    <li><a href="#" th:href="@{/employee/allEmployees}">View Employees</a></li>
+                    <li><a href="#" th:href="@{/employee/employees}">View Employees</a></li>
                     <li><a href="#" th:href="@{/employee/employees}">Edit Employee</a></li>
                     <li><a href="#" th:href="@{/employee/create-employee}">New Employee</a></li>
                 </ul>
@@ -42,7 +42,7 @@
 
     <h2>Employee Details</h2>
     <div>
-        <form class="form-horizontal" action="#" th:action="@{/employee/create-employee}" th:object="${employee}"
+        <form class="form-horizontal" action="#" th:action="@{/employee/employees}" th:object="${employee}"
               method="POST">
             <input type="hidden" th:value="${myEmployee.id}"/>
 
@@ -76,8 +76,8 @@
             </div>
 
             <div class="row">
-                <button type="submit" class="btn btn-default">Submit</button>
-                <button type="reset" class="btn btn-default">Clear</button>
+                <button type="submit" class="btn btn-default">OK</button>
+
                 <button type="button" class="btn btn-default">Exit</button>
             </div>
         </form>

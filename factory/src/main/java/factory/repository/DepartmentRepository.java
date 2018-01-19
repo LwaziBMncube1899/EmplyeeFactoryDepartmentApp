@@ -2,6 +2,7 @@ package factory.repository;
 
 import factory.model.Department;
 /*import Employee;*/
+import factory.model.Factory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,6 +16,6 @@ public interface DepartmentRepository extends JpaRepository<Department, Long>{
     Department findByFactory(@Param("id") Long factoryDepartmentId);
 */
     @Query( "select d from Department d WHERE d.factory = :id" )
-    List<Department>  findDepartmentsByFactory(@Param("id") Long id);
+    List<Department>  findDepartmentsByFactory(@Param("id") Factory factory);
 
 }

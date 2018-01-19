@@ -3,6 +3,10 @@ package factory.service;
 import factory.model.Factory;
 import factory.repository.FactoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -12,6 +16,7 @@ import java.util.List;
 @Transactional
 public class FactoryService {
 
+    private static final int PAGE_SIZE = 1;
     private final FactoryRepository factoryRepository;
 
     @Autowired
@@ -29,9 +34,11 @@ public class FactoryService {
         return factoryRepository.findByName(name);
     }
 
-    public List<Factory> factoryList() {
-        return factoryRepository.findAll();
+    public Page<Factory> findAll(Pageable pageable) {
+
+        return    factoryRepository.findAll(pageable);
     }
+
 
     public void deleteAllFactores() {
         factoryRepository.deleteAll();

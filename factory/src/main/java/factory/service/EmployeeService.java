@@ -2,9 +2,12 @@
 package factory.service;
 
 
+import factory.model.Department;
 import factory.repository.EmployeeRepository;
 import factory.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -35,8 +38,10 @@ public class EmployeeService {
     public Employee findByName(String name) {
         return employeeRepository.findByEmployeeName(name);
     }
-    public List<Employee> findAll() {
-        return employeeRepository.findAll();
+    public Page<Employee> findAll(Pageable pageable)
+    {
+    Page<Employee> employeeList = employeeRepository.findAll(pageable);
+        return employeeList;
     }
 
     public void deleteAllFactores() {
@@ -58,4 +63,7 @@ public class EmployeeService {
         return findByName(employee.getEmployeeName()) !=null;
     }
 
+    public List<Employee> findDepartmentEmployeeByID(Department departmentId) {
+      return employeeRepository.findEmployeesByDepartmentId(departmentId);
+    }
 }

@@ -10,8 +10,15 @@
     <script src="../static/js/jquery.min.js"
             th:src="@{/js/jquery.min.js}"></script>
 
+    <script src="../static/layui/layui.js"
+            th:src="@{/layui/layui.js}"></script>
+
+    <link rel="stylesheet" href="../static/layui/css/layui.css"
+          th:href="@{/layui/css/layui.css}" media="screen"/>
+
+
 </head>
-<body >
+<body>
 <div class="container">
     <nav class="navbarnavbar-default">
         <div class="container-fluid">
@@ -42,44 +49,124 @@
 </div>
 
 
+<div class="container">
+    <div class="demoTable">
+        Search ID：
+        <div class="layui-inline">
+            <input class="layui-input" name="id" id="demoReload" autocomplete="off"/>
+        </div>
+        <button class="layui-btn" data-type="reload">Search</button>
+    </div>
+
+    <table class="table table-striped" border="2" id="LAY_table_user">
+    </table>
+
     <div class="container">
-
-        <table class="table table-striped" border="2">
-
+        <table>
             <tr>
-<th>
-    Factory Id
-</th>
+                <th>
+                    Factory Id
+                </th>
                 <th>
                     Factory Address
                 </th>
                 <th>
-                    Factory  ContactNumber
+                    Factory ContactNumber
                 </th>
                 <th>
                     Factory Email
                 </th>
                 <th>
-                    Factory  Name
+                    Factory Name
                 </th>
 
                 <th>View</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
-                <tr th:each="fact: ${myFactories}">
+            <tr th:each="fact: ${myFactories}">
                 <td th:text="${fact.id}"></td>
-            <td th:text="${fact.address}"></td>
-            <td th:text="${fact.contactNumber}"></td>
-            <td th:text="${fact.email}"></td>
-            <td th:text="${fact.name}"></td>
-            <td><a href="#" th:href="@{'/factory/factory/'+ ${fact.id}}" class="btn btn-default">View</a></td>
-            <td><a href="#" th:href="@{'/factory/edit/' + ${fact.id}}" class="btn btn-default">Edit</a></td>
-            <td><a href="#" th:href="@{'/factory/delete/' + ${fact.id}}" class="btn btn-danger">Delete</a></td>
-        </tr>
+                <td th:text="${fact.address}"></td>
+                <td th:text="${fact.contactNumber}"></td>
+                <td th:text="${fact.email}"></td>
+                <td th:text="${fact.name}"></td>
+                <td><a href="#" th:href="@{'/factory/factoryDepartments/'+ ${fact.id}}" class="btn btn-default">View</a>
+                </td>
+                <td><a href="#" th:href="@{'/factory/edit/' + ${fact.id}}" class="btn btn-default">Edit</a></td>
+
+                <td><a href="#" th:href="@{'/factory/delete/' + ${fact.id}}" class="btn btn-danger">Delete</a></td>
+            </tr>
 
         </table>
     </div>
+</div>
+
+<script >
+    layui.use('table', function () {
+        var table = layui.table;
+
+        //Method level rendering
+        table.render({
+            elem: '#LAY_table_user'
+             ,url: "/factory/jFactories"
+            , cols: [[
+                {checkbox: true, fixed: true}
+                , {field: 'id', title: 'ID', width: 80, sort: true, fixed: true}
+                , {field: 'address', title: 'Factory Address', width: 150, sort: true}
+                , {field: 'contactNumber', title: 'Factory ContactNumber', width: 150}
+                , {field: 'email', title: 'Factory Email', width: 150}
+                , {field: 'name', title: 'Factory Name', sort: true, width: 150}
+                , {field: 'View', title: 'View',  width: 150}
+                , {field: 'Edit', title: 'Edit', width: 150}
+                , {field: 'Delete', title: 'Delete', width: 150}
+            ]]
+            , id: 'testReload'
+            , page: true
+            , height: 315
+        });
+        //监听性别操作
+        form.on('button(btnDelete)', function(obj){
+            layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
+        });
+
+        //监听锁定操作
+        form.on('button(btnEdit)', function(obj){
+            layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
+        });
+        //监听锁定操作
+        form.on('button(btnView)', function(obj){
+            layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
+        });
+
+        var $ = layui.$, active = {
+            reload: function () {
+                var demoReload = $('#demoReload');
+
+                //Perform overload
+                table.reload('testReload', {
+                    page: {
+                        curr: 1 //Start again on page 1.
+                    }
+                    , where: {
+                        key: {
+                            id: demoReload.val()
+                        }
+                    }
+                });
+            }
+        };
+
+        $('.demoTable .layui-btn').on('click', function () {
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    });
+</script>
+
+<script type="text/html" id="checkboxTpl">
+    <!-- 这里的 checked 的状态只是演示 -->
+    <input type="button" name="btnView" value="{{d.id}}" title="锁定" lay-filter="lockDemo" {{ d.id == 10006 ? 'checked' : '' }}>
+</script>
 
 </body>
 </html>

@@ -6,6 +6,8 @@ import factory.model.Factory;
 import factory.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +32,7 @@ public class DepartmentService {
         return departmentRepository.findOne(id);
     }
 
-    public List<Department> findByFactoryId(Long id) {
+    public List<Department> findDepartmentsByFactoryId(Factory id) {
 
       return   departmentRepository.findDepartmentsByFactory(id);
     }
@@ -41,8 +43,10 @@ public class DepartmentService {
     }
 */
 
-    public List<Department> findAll() {
-        return departmentRepository.findAll();
+    public Page<Department> findAll(Pageable pageable)
+    {
+        Page<Department> departmentList = departmentRepository.findAll(pageable);
+        return departmentList;
     }
 
     public void deleteAllFactores() {

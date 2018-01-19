@@ -66,6 +66,25 @@
                 </div>
           </div>
 
+            <div class="container">
+                <table class="table table-stripped">
+                    <tr>
+                        <th>Employee Name</th>
+
+                        <th>Employee Email</th>
+                    </tr>
+                    <tbody>
+                    <tr th:each="emp: ${myEmployees}">
+                        <td th:text="${emp.employeeName}"></td>
+                        <td th:text="${emp.employeeEmail}"></td>
+                        <td><a href="#" th:href="@{'/employee/employee/' +${emp.id}}" class="btn btn-default">View</a></td>
+                    </tr>
+                    </tbody>
+
+
+                </table>
+
+            </div>
                  <div class="row">
                 <button type="submit" class="btn btn-default">OK</button>
 
