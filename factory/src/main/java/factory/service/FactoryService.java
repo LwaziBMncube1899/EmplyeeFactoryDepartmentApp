@@ -59,4 +59,9 @@ public class FactoryService {
         return findByName(factory.getName()) !=null;
     }
 
+    @Transactional
+    public List<Factory> search(String searchTerm) {
+      return factoryRepository.searchWithJPQLQuery(searchTerm);
+    }
+
 }

@@ -50,18 +50,19 @@
 
 
 <div class="container">
+  <!-- <form>-->
     <div class="demoTable">
         Search ID：
         <div class="layui-inline">
             <input class="layui-input" name="id" id="demoReload" autocomplete="off"/>
         </div>
-        <button class="layui-btn" data-type="reload">Search</button>
+        <a href="#" onclick="alert()" class="layui-btn" data-type="reload" >Search</a>
     </div>
 
     <table class="table table-striped" border="2" id="LAY_table_user">
     </table>
 
-    <div class="container">
+    <div class="container" hidden="hidden">
         <table>
             <tr>
                 <th>
@@ -116,9 +117,7 @@
                 , {field: 'contactNumber', title: 'Factory ContactNumber', width: 150}
                 , {field: 'email', title: 'Factory Email', width: 150}
                 , {field: 'name', title: 'Factory Name', sort: true, width: 150}
-                , {field: 'View', title: 'View',  width: 150}
-                , {field: 'Edit', title: 'Edit', width: 150}
-                , {field: 'Delete', title: 'Delete', width: 150}
+
             ]]
             , id: 'testReload'
             , page: true
@@ -141,7 +140,7 @@
         var $ = layui.$, active = {
             reload: function () {
                 var demoReload = $('#demoReload');
-
+alert(demoReload.val());
                 //Perform overload
                 table.reload('testReload', {
                     page: {
@@ -163,10 +162,6 @@
     });
 </script>
 
-<script type="text/html" id="checkboxTpl">
-    <!-- 这里的 checked 的状态只是演示 -->
-    <input type="button" name="btnView" value="{{d.id}}" title="锁定" lay-filter="lockDemo" {{ d.id == 10006 ? 'checked' : '' }}>
-</script>
 
 </body>
 </html>

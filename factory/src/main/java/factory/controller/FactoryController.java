@@ -17,8 +17,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Iterator;
 import java.util.List;
+
 
 @Controller
 @RequestMapping("/factory")
@@ -29,7 +29,7 @@ public class FactoryController {
     @Autowired
     private final DepartmentService departmentService = null;
 
-    private FactorySearchServiceImpl factorySearchServiceImpl;
+
 
     @Autowired
     public FactoryController(FactoryService factoryService) {
@@ -79,7 +79,7 @@ public class FactoryController {
 
     @RequestMapping("jFactories")
     @ResponseBody
-    public PagerResp returnAllFactories(Integer page, Integer limit, Model model) {
+    public PagerResp returnAllFactories(Integer page , Integer limit , Model model) {
 
         /*
        Model model, Pageable pageable
@@ -104,13 +104,16 @@ public class FactoryController {
 
     }
 
-/*    @GetMapping("search/{queryString}")
-    public List<Factory> searchFactory(@RequestParam(value = "pageNumber") Integer pageNumber,
-                                       @RequestParam(value = "pageSize", required = false) Integer pageSize,
-                                       @RequestParam(value = "searchContent") String searchContent) {
-        return factorySearchServiceImpl.searchFactory(pageNumber,pageSize,searchContent);
+   @RequestMapping("search")
+   @ResponseBody
+    public PagerResp searchFactory(@RequestParam String searchContent) {
 
-    }*/
+        List<Factory> factoriesSearch = factoryService.search(searchContent);
+
+       PagerResp resp = new PagerResp();
+       resp.setData(factoriesSearch);
+       return resp;
+    }
 
 
 
